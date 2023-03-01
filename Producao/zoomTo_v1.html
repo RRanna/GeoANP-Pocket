@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Mapa do Brasil</title>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+	<style>
+		#mapid { height: 500px; }
+	</style>
+</head>
+<body>
+	<div id="mapid"></div>
+	<button onclick="zoomToBrazil()">Visualização do Brasil</button>
+
+	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+	<script>
+		var mymap = L.map('mapid').setView([-15.7942, -47.8825], 4);
+
+		L.marker([-15.7942, -47.8825]).addTo(mymap);
+
+		var geojsonFeature = {
+		    "type": "Feature",
+		    "properties": {
+		        "name": "Brasil"
+		    },
+		    "geometry": {
+		        "type": "Polygon",
+		        "coordinates": [[
+		            [-73.9876, -33.7963],
+		            [-73.9876, 4.5906],
+		            [-35.1674, 4.5906],
+		            [-35.1674, -33.7963],
+		            [-73.9876, -33.7963]
+		        ]]
+		    }
+		};
+
+		L.geoJSON(geojsonFeature).addTo(mymap);
+
+		function zoomToBrazil() {
+		    mymap.fitBounds([[-33.7963, -73.9876], [4.5906, -35.1674]]);
+		}
+	</script>
+</body>
+</html>

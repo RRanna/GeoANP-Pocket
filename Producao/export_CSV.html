@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Exportar CSV</title>
+</head>
+<body>
+
+<button onclick="exportToCSV()">Exportar para CSV</button>
+
+<script>
+function exportToCSV() {
+  const data = [
+    ['João', 'Silva', 'joao.silva@email.com', '123456789'],
+    ['Maria', 'Santos', 'maria.santos@email.com', '987654321'],
+    ['José', 'Oliveira', 'jose.oliveira@email.com', '456789123']
+  ];
+
+  let csvContent = '';
+  data.forEach(function(rowArray) {
+    let row = rowArray.join(',');
+    csvContent += row + '\r\n';
+  });
+
+  const encoder = new TextEncoder();
+  const csvBytes = encoder.encode(csvContent);
+  const blob = new Blob([csvBytes], { type: 'text/csv;charset=utf-8;' });
+
+  const url = URL.createObjectURL(blob);
+  const downloadLink = document.createElement('a');
+  downloadLink.setAttribute('href', url);
+  downloadLink.setAttribute('download', 'dados.csv');
+  document.body.appendChild(downloadLink);
+  downloadLink.click();
+}
+</script>
+
+</body>
+</html>

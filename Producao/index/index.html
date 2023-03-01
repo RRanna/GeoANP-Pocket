@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Mapa Interativo do Brasil com Pontos de Coordenadas</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.0/MarkerCluster.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.0/MarkerCluster.Default.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.0/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <style type="text/css">
+
+    </style>
+
+    <!-- Script para mover a label com o cursor-->
+    <script>
+
+        document.addEventListener('mouseover', function (e) {
+            var tooltip = document.querySelector('.tooltip');
+            if (tooltip.style.display === 'block') {
+                tooltip.style.top = (e.pageY + 10) + 'px';
+                tooltip.style.left = (e.pageX + 10) + 'px';
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h1 id="title">GeoANP Pocket - Poços</h1>
+        <table class="content">
+            <tr>
+                <td>
+                    <div id="map"></div>
+                </td>
+                <td id="legenda">
+                    <p id="titleLeg" class="center"><b>Informações do mapa</b></p>
+                    <p class="center">Dados de poços selecionados pela Superintendência de Dados Técnicos da ANP</p>
+                    <p class="center">Data da atualização: jan/2023</p>
+                    <p class="center">Sistema Geodésico de Referência: SIRGAS 2000</p>
+                    <p class="center"><b>Ferramentas de busca:</b></p>
+                    <div>
+                        <select id="comboOper">
+                            <option value="0">Selecione uma operadora</option>
+                            <option value="1">3R Areia</option>
+                            <option value="2">3R Candeias S.A.</option>
+                            <option value="3">3R Fazenda Belém</option>
+                            <option value="4">3R Macau</option>
+                            <option value="5">3R Petroleum Off</option>
+                            <option value="6">3R Rio Ventura S.A</option>
+                            <option value="7">Aguila</option>
+                            <option value="8">Alcom</option>
+                            <option value="9">Allpetro</option>
+                            <option value="10">Alvopetro</option>
+                            <option value="11">Amerada Hess</option>
+                            <option value="12">Anadarko</option>
+                            <option value="13">Arclima</option>
+                            <option value="14">Aurizônia Petróleo</option>
+                            <option value="15">Barra Bonita</option>
+                            <option value="16">BG Brasil</option>
+                            <option value="17">BGM</option>
+                            <option value="18">BP Brasil</option>
+                            <option value="19">BP Energy</option>
+                            <option value="20">Brasil Refinarias</option>
+                            <option value="21">BW Offshore</option>
+                            <option value="22">Capixaba Energia</option>
+                            <option value="23">Carmo</option>
+                            <option value="24">Cemes</option>
+                            <option value="25">Chevron Brasil</option>
+                            <option value="26">Cisco</option>
+                            <option value="27">Cowan Petróleo e Gás</option>
+                            <option value="28">Devon Brasil</option>
+                            <option value="29">Dommo Energia</option>
+                            <option value="30">Egesa</option>
+                            <option value="31">Enauta Energia</option>
+                            <option value="32">Energizzi Energias</option>
+                            <option value="33">Eneva</option>
+                            <option value="34">Eni Oil</option>
+                            <option value="35">EPG Brasil</option>
+                            <option value="36">Equinor Brasil</option>
+                            <option value="37">Equinor Energy</option>
+                            <option value="38">Espigão</option>
+                            <option value="39">Esso Expl Offshore</option>
+                            <option value="40">Esso Explor e Des</option>
+                            <option value="41">ExxonMobil Brasil</option>
+                            <option value="42">Geopark Brasil</option>
+                            <option value="43">Great Energy</option>
+                            <option value="44">Guto & Cacal</option>
+                            <option value="45">Imetame</option>
+                            <option value="46">Integral</option>
+                            <option value="47">Karoon Brasil</option>
+                            <option value="48">Leros</option>
+                            <option value="49">Maha Energy</option>
+                            <option value="50">Mandacaru Energia</option>
+                            <option value="51">Marítima</option>
+                            <option value="52">Máxima 07</option>
+                            <option value="53">Níon Energia</option>
+                            <option value="54">Nord</option>
+                            <option value="55">Norteoleum</option>
+                            <option value="56">Nova Petróleo</option>
+                            <option value="57">Nova Petróleo Rec</option>
+                            <option value="58">NTF</option>
+                            <option value="59">Oceania</option>
+                            <option value="60">Oeste de Canoas</option>
+                            <option value="61">ONGC Campos</option>
+                            <option value="62">Origem</option>
+                            <option value="63">Origem Alagoas</option>
+                            <option value="64">Panergy</option>
+                            <option value="65">Parnaíba Gás Natural</option>
+                            <option value="66">Perenco Brasil</option>
+                            <option value="67">Perícia</option>
+                            <option value="68">Petra Energia</option>
+                            <option value="69">Petro Rio Jaguar</option>
+                            <option value="70">Petro Rio O&G</option>
+                            <option value="71">Petro-Victory</option>
+                            <option value="72">Petroborn</option>
+                            <option value="73">Petrobras</option>
+                            <option value="74">Petrogal Brasil</option>
+                            <option value="75">Petroil</option>
+                            <option value="76">Petrom</option>
+                            <option value="77">PetroRecôncavo</option>
+                            <option value="78">Petrosynergy</option>
+                            <option value="79">Phoenix Óleo & Gás</option>
+                            <option value="80">Potiguar E&P S.A.</option>
+                            <option value="81">Quantra</option>
+                            <option value="82">Queiroz Galvão</option>
+                            <option value="83">Recôncavo E&P</option>
+                            <option value="84">Recôncavo Energia</option>
+                            <option value="85">Repsol Sinopec</option>
+                            <option value="86">Rosneft</option>
+                            <option value="87">Seacrest SPE Cricaré</option>
+                            <option value="88">SHB</option>
+                            <option value="89">Shell</option>
+                            <option value="90">Shell Brasil</option>
+                            <option value="91">Silver Marlin</option>
+                            <option value="92">Sipet</option>
+                            <option value="93">Slim Drilling</option>
+                            <option value="94">SPE Miranga</option>
+                            <option value="95">Tecpetrol Brasil</option>
+                            <option value="96">Tek</option>
+                            <option value="97">Texaco BM-C-5</option>
+                            <option value="98">TotalEnergies EP</option>
+                            <option value="99">Trident Energy</option>
+                            <option value="100">Ubuntu Engenharia</option>
+                            <option value="101">Unocal</option>
+                            <option value="102">UTC Engenharia</option>
+                            <option value="103">Vanco</option>
+                            <option value="104">Vipetro</option>
+                            <option value="105">W. Washington</option>
+                            <option value="106">Wintershall BM-S-14</option>
+                        </select>
+                        <button id="filterOperButton"><b>+ Filtrar por operadora</b></button>
+                    </div>
+                    <br>
+                    <div>
+                        <select id="comboBasin">
+                            <option value="0">Selecione a Bacia Sedimentar</option>
+                            <option value="1">Acre</option>
+                            <option value="2">Alagoas</option>
+                            <option value="3">Almada</option>
+                            <option value="4">Amazonas</option>
+                            <option value="5">Araripe</option>
+                            <option value="6">Barreirinhas</option>
+                            <option value="7">Bragança - Vizeu</option>
+                            <option value="8">Camamu</option>
+                            <option value="9">Campos</option>
+                            <option value="10">Ceará</option>
+                            <option value="11">Cumuruxatiba</option>
+                            <option value="12">Espírito Santo</option>
+                            <option value="13">Foz do Amazonas</option>
+                            <option value="14">Jacuípe</option>
+                            <option value="15">Jatobá</option>
+                            <option value="16">Jequitinhonha</option>
+                            <option value="17">Marajó</option>
+                            <option value="18">Mucuri</option>
+                            <option value="19">Pantanal</option>
+                            <option value="20">Pará - Maranhão</option>
+                            <option value="21">Paraná</option>
+                            <option value="22">Parecis - Alto Xingu</option>
+                            <option value="23">Parnaíba</option>
+                            <option value="24">Pelotas</option>
+                            <option value="25">Pernambuco - Paraíba</option>
+                            <option value="26">Potiguar</option>
+                            <option value="27">Recôncavo</option>
+                            <option value="28">Rio do Peixe</option>
+                            <option value="29">Santos</option>
+                            <option value="30">São Francisco</option>
+                            <option value="31">São Luís</option>
+                            <option value="32">Sergipe</option>
+                            <option value="33">Solimões</option>
+                            <option value="34">Tacutu</option>
+                            <option value="35">Tucano Central</option>
+                            <option value="36">Tucano Norte</option>
+                            <option value="37">Tucano Sul</option>
+                        </select>
+                        <button id="filterBasinButton"><b>+ Filtrar por Bacia</b></button>
+                    </div>
+                    <br><br>
+                    <button id="clearSelection">Limpar Seleção</button>
+                    <br><br>
+                    <a
+                        href="https://www.gov.br/anp/pt-br/assuntos/exploracao-e-producao-de-oleo-e-gas/dados-tecnicos/ad/tabela-de-pocos.xlsx">baixar
+                        os dados de poços no site da ANP em XLS</a>
+                    <br>
+                    <a
+                        href="https://www.gov.br/anp/pt-br/assuntos/exploracao-e-producao-de-oleo-e-gas/dados-tecnicos/ad/shapefile-de-pocos.zip">baixar
+                        os dados de poços no site da ANP em SHP</a>
+                    <br>
+                    <a href="https://www.gov.br/anp/pt-br/assuntos/exploracao-e-producao-de-oleo-e-gas/dados-tecnicos">baixar
+                        outros dados técnicos da ANP</a>
+                    <br><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div id="selection-count"></div>
+                    <p id="text-select-mode">
+                        <input type="checkbox" id="select-mode" />
+                        <b>Modo de seleção espacial</b>
+                        <br><span class="hover-text" style="color: #FF7F50;">*Ajuda</span>
+                        <span class="tooltip"><br>Para utilizar essa ferramenta, é necessário:
+                            <br> 1. Exibir previamente dados de poços, por meios dos filtros "por operadora" e "por
+                            bacia sedimentar";
+                            <br> 2. Selecionar as ferramentas de desenho do Painelo de Controle;
+                            <br> 3. Selecionar os poços desejados.)</span>
+                    </p>
+                </td>
+                <td class="center">
+                    <button id="mostrarResultados" onclick="openWindow()">Exibir tabela de resultados</button>
+                    <br>
+                    <button onclick="exportToCsv()">Exportar resultados (Tabela CSV)</button>
+                </td>
+            </tr>
+            <tr></tr>
+        </table>
+        <br><br>
+        <p class="center" font="Arial"> Resultados da pesquisa:</p>
+        <table id="tableResults" class="center second-table">
+            <tr>
+                <th bgcolor=#0000CD style="color: #E0FFFF;">Poço</th>
+                <th bgcolor=#0000CD style="color: #E0FFFF;">Cadastro ANP</th>
+                <th bgcolor=#0000CD style="color: #E0FFFF;">Bacia</th>
+                <th bgcolor=#0000CD style="color: #E0FFFF;">Operadora</th>
+                <th bgcolor=#0000CD style="color: #E0FFFF;">Ambiente</th>
+                <th bgcolor=#0000CD style="color: #E0FFFF;">Sigilo</th>
+            </tr>
+        </table>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

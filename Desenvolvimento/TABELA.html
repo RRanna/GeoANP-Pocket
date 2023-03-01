@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+  </style>
+</head>
+<body>
+  <table id="table">
+    <tr>
+      <th bgcolor=#0000CD font=#ddd1dd>País</th>
+      <th bgcolor=#0000CD>Moeda</th>
+      <th bgcolor=#0000CD>Data da Independência</th>
+      <th bgcolor=#0000CD>Área (km²)</th>
+      <th bgcolor=#0000CD>População</th>
+    </tr>
+    <tr>
+      <td>China</td>
+      <td>Yuan Renminbi</td>
+      <td>1 de Outubro de 1949</td>
+      <td>9.596.961</td>
+      <td>1.439.323.776</td>
+    </tr>
+    <tr>
+      <td>India</td>
+      <td>Rupia Indiana</td>
+      <td>15 de Agosto de 1947</td>
+      <td>3.287.263</td>
+      <td>1.366.417.754</td>
+    </tr>
+    <tr>
+      <td>Estados Unidos</td>
+      <td>Dólar Americano</td>
+      <td>4 de Julho de 1776</td>
+      <td>9.147.593</td>
+      <td>331.449.281</td>
+    </tr>
+  </table>
+  <br>
+  <form onsubmit="addRow(); return false;">
+    <label for="country">País:</label>
+    <input type="text" id="country">
+    <label for="currency">Moeda:</label>
+    <input type="text" id="currency">
+    <label for="independence">Data da Independência:</label>
+    <input type="text" id="independence">
+    <label for="area">Área (km²):</label>
+    <input type="text" id="area">
+    <label for="population">População:</label>
+    <input type="text" id="population">
+    <input type="submit" value="Adicionar">
+  </form>
+  <script>
+    function addRow() {
+      var table = document.getElementById("table");
+      var row = table.insertRow(-1);
+      var cell1 = row.insertCell(0);
+      var cell2 = row.insertCell(1);
+      var cell3 = row.insertCell(2);
+      var cell4 = row.insertCell(3);
+      var cell5 = row.insertCell(4);
+      cell1.innerHTML = document.getElementById("country").value;
+cell2.innerHTML = document.getElementById("currency").value;
+cell3.innerHTML = document.getElementById("independence").value;
+cell4.innerHTML = document.getElementById("area").value;
+cell5.innerHTML = document.getElementById("population").value;
+}
+</script>
+
+</body>
+</html>

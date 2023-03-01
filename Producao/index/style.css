@@ -1,0 +1,183 @@
+    body {
+        background-color: #F0F8FF;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        }
+
+    .center {
+        text-align: center;
+    }
+
+    #title {
+        font-family: "Arial";
+        color:  #1abc9c;
+        width: 100%;
+        text-align: center;
+    }
+
+    #map {
+        height: 550px;
+        width: 700px;
+        margin-left: 20px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        z-index: 1
+    }
+
+    #legenda {
+        font-family: "Arial";
+        background-color: #f8f8f8;
+        max-width: 320px;
+        height:550px;
+        text-align: center;
+        border: 1px solid black;
+        border-radius: 5px;
+        padding: 6px;
+        margin-left: 5px;
+        z-index: 2;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    }
+
+    #text-select-mode {
+        font-family: "Arial";
+    }
+
+    #container {
+    margin: 0 auto;
+    max-width: 1500px;
+    padding: 6px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    }
+
+    button {
+    background-color: #1abc9c;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 10px 14px;
+    transition: background-color 0.3s ease-in-out;
+        margin-bottom: 10px;
+    }
+
+    form {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 80px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #333;
+        margin-left: 20px;
+    }
+
+    input[type="text"],
+    select {
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    padding: 10px;
+    margin-bottom: 10px;
+
+    }
+    
+    textarea {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    padding: 6px;
+    resize: horizontal;
+    width: 550px;
+    height: 200px;
+    }
+
+    .checkbox-label {
+    display: block;
+    margin-bottom: 16px;
+    color: #333;
+    }
+
+    .checkbox {
+    margin-right: 10px;
+    }
+
+/* Estilo padrão da label suspensa associada à ajuda do "Modo seleção espacial"*/
+    .tooltip {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 14px;
+    z-index: 1;
+        }
+
+/* Estilo do texto com hover associada à ajuda do "Modo seleção espacial"*/
+    .hover-text:hover + .tooltip {
+    display: block;
+    }
+/* Style for the draggable window */
+    .draggable-window {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 600px;
+        height: 400px;
+        transform: translate(-50%, -50%);
+        border: 1px solid black;
+        background-color: white;
+        z-index: 1000;
+        overflow: auto;
+    }
+    /* Style for the close button */
+    .close-button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 10px;
+        cursor: pointer;
+    }
+    /* Style for the table */
+    table model {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    table.content {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    th {
+        background-color: #e3dcdc;
+        font-weight: bold;
+        cursor: pointer;
+        padding: 8px;
+        text-align: left;
+        transition: background-color 0.3s ease;
+    }
+
+    th:hover {
+        background-color: #cfc0c0;
+    }
+
+    td,
+    th {
+        border: 1px solid #ddd;
+        color: #727d96;
+        padding: 8px;
+    }
+
+    .second-table {
+        max-height: 300px;
+        overflow: auto;
+    }

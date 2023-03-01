@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tabela com atributo onclick em JavaScript</title>
+	<style>
+		table {
+			border-collapse: collapse;
+			width: 100%;
+		}
+		th, td {
+			text-align: left;
+			padding: 8px;
+			border-bottom: 1px solid #ddd;
+		}
+		tr:hover {
+			background-color: #f5f5f5;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<table id="myTable">
+		<thead>
+			<tr>
+				<th>Nome</th>
+				<th>E-mail</th>
+				<th>Ação</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>João</td>
+				<td>joao@example.com</td>
+				<td onclick="alert('Clicou em João')">Clique aqui</td>
+			</tr>
+			<tr>
+				<td>Maria</td>
+				<td>maria@example.com</td>
+				<td onclick="alert('Clicou em Maria')">Clique aqui</td>
+			</tr>
+			<tr>
+				<td>Carlos</td>
+				<td>carlos@example.com</td>
+				<td onclick="alert('Clicou em Carlos')">Clique aqui</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<script>
+		var table = document.getElementById("myTable");
+		var rows = table.getElementsByTagName("tr");
+
+		for (var i = 0; i < rows.length; i++) {
+			var currentRow = table.rows[i];
+			var currentCell = currentRow.getElementsByTagName("td")[2];
+			currentCell.setAttribute("onclick", "alert('Clicou na célula " + i + "')");
+		}
+	</script>
+</body>
+</html>
